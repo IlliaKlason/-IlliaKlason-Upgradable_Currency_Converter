@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { DiApple } from 'react-icons/di';
 
+
+
 export const Title = styled.h2`
-color: yellow;
+color: #FFD700;
 font-size: ${p => p.theme.fontSizes.l};
-background: blue;
+background: #0057B8;;
 padding: ${p => p.theme.space[4]}px ${p => p.theme.space[4]}px;
 border-radius: ${p => p.theme.radii.lg};
 `

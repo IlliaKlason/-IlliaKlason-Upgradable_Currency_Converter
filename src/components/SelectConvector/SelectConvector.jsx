@@ -26,9 +26,11 @@ const SelectConvector = ({ title, currency }) => {
       for (let key in currency) {
         options.push({ value: currency[key], label: key });
       }
-      return options
-        .filter(item => item.label !== 'RUB')
-        .sort((a, b) => a.label.localeCompare(b.label));
+      return (
+        options
+          // .filter(item => item.label !== 'RUB')
+          .sort((a, b) => a.label.localeCompare(b.label))
+      );
     }
   };
   const options = optionsUpdate();

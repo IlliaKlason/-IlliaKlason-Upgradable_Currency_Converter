@@ -9,7 +9,7 @@ const HeaderSearchInput = ({ locationChanger, currency, location }) => {
   const handleLocationChanger = e => {
     e.preventDefault();
     const curr = locationInput.current.value.toUpperCase();
-    const currencyList = Object.keys(currency).filter(item => item !== 'RUB');
+    const currencyList = Object.keys(currency);
     currencyList.includes(curr)
       ? locationChanger(curr)
       : alert('Currency not found, please try again.');

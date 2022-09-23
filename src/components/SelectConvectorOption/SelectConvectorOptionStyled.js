@@ -8,10 +8,10 @@ export const Div = styled.div`
   flex-direction: column;
   gap: 16px;
   &:first-child {
-    background-color: blue;
+    background-color: #0057B8;
   }
   &:last-child {
-    background-color: yellow;
+    background-color: #FFD700;
   }
 `;
 export const Input = styled.input`

@@ -11,6 +11,7 @@ export const App = () => {
   try {
     const getCurrencies = async () => {
       const { rates } = await NBU_APIRequest();
+      delete rates.RUB;
       setCurrency(rates);
     };
     useEffect(() => {

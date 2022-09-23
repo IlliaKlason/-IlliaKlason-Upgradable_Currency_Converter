@@ -9,11 +9,11 @@ const HeaderList = ({ currency, location }) => {
         list.map(item => {
           const UAH = item === 'UAH' && location === 'UAH';
           const EUR = item === 'EUR' && location === 'EUR';
-          const value = UAH || EUR ? 1.0 : locationConverter(currency[item]);
+          const value = UAH || EUR ? 1 : locationConverter(currency[item]);
           return (
             <li key={item}>
               <Text>{item}</Text>
-              <Text>{value ? value.toFixed(3) : '1.000'}</Text>
+              <Text>{value.toFixed(3)}</Text>
             </li>
           );
         })}
