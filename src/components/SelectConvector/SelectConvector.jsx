@@ -6,41 +6,47 @@ import { Title } from './SelectConvectorStyled';
 
 const SelectConvector = ({ title, currency }) => {
   const [leftValue, setLeftValue] = useState(0);
-  const [rigteValue, setRightValue] = useState(0);
-  const [leftCurrency, setLeftCurrency] = useState();
-  const [rigteCurrency, setRightCurrency] = useState();
+  const [rightValue, setRightValue] = useState(0);
+  const [leftCurrency, setLeftCurrency] = useState(0);
+  const [rightCurrency, setRightCurrency] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
   const [leftClick, setLeftClick] = useState(false);
   const [rightClick, setRightClick] = useState(false);
 
   const optionsUpdate = () => {
-    const keys = Object.keys(currency).filter(item => item !== 'RUB');
-    const values = Object.values(currency);
-    const options = [];
-    for (let i = 0; i < keys.length; i += 1) {
-      options.push({ value: values[i], label: keys[i] });
+    if (currency) {
+      //   const keys = Object.keys(currency);
+      //   //   filter(item => item === 'RUB');
+      //   const values = Object.values(currency);
+      //   const options = [];
+      //   for (let i = 0; i < keys.length; i += 1) {
+      //     options.push({ value: values[i], label: keys[i] });
+      //   }
+      const options = [];
+      for (let key in currency) {
+        options.push({ value: currency[key], label: key });
+      }
+      return options.filter(item => item.label !== 'RUB');
     }
-
-    return options;
   };
   const options = optionsUpdate();
 
   useEffect(() => {
-    if (rigteCurrency && leftCurrency) {
+    if (rightCurrency && leftCurrency) {
       setIsSelected(true);
     }
-  }, [leftCurrency, rigteCurrency]);
+  }, [leftCurrency, rightCurrency]);
 
   useEffect(() => {
     if (isSelected && leftClick) {
-      setRightValue(((leftValue / leftCurrency) * rigteCurrency).toFixed(3));
+      setRightValue(((leftValue / leftCurrency) * rightCurrency).toFixed(2));
       setLeftClick(false);
     }
-  }, [isSelected, leftClick, leftCurrency, leftValue, rigteCurrency]);
+  }, [isSelected, leftClick, leftCurrency, leftValue, rightCurrency]);
 
   useEffect(() => {
     if (isSelected && rightClick) {
-      setLeftValue(((rigteValue / rigteCurrency) * leftCurrency).toFixed(2));
+      setLeftValue(((rightValue / rightCurrency) * leftCurrency).toFixed(2));
       setRightClick(false);
     }
   }, [
@@ -48,8 +54,8 @@ const SelectConvector = ({ title, currency }) => {
     leftClick,
     leftCurrency,
     rightClick,
-    rigteCurrency,
-    rigteValue,
+    rightCurrency,
+    rightValue,
   ]);
 
   return (
@@ -78,7 +84,7 @@ const SelectConvector = ({ title, currency }) => {
         />
         <SelectConvectorOption
           selectTool={setRightClick}
-          inputValue={rigteValue}
+          inputValue={rightValue}
           disabled={!isSelected}
           inputChanger={setRightValue}
           options={options}

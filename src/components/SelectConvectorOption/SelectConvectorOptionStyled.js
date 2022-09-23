@@ -31,7 +31,8 @@ export const Input = styled.input`
   padding-left: ${p => p.theme.space[3]}px;
   width: 200px;
   :disabled {
-    background-color:  gray;
+    background-color:  gray
+    ;
   }
   :not(:disabled) {
     :hover,

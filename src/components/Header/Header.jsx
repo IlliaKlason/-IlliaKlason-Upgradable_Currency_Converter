@@ -23,4 +23,4 @@ const Header = ({ currency }) => {
     </Box>
   );
 };
-export default Header
+export default Header;

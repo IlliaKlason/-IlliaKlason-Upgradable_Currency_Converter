@@ -6,25 +6,28 @@ import Header from './Header';
 import SelectConvector from './SelectConvector';
 
 export const App = () => {
-  const [currency, setCurrency] = useState();
+  const [currency, setCurrency] = useState(null);
 
-  useEffect(() => {
-    NBU_APIRequest()
-      .then(({ rates }) => setCurrency(rates))
-      .catch();
-  }, []);
+  try {
+    const getCurrencies = async () => {
+      const { rates } = await NBU_APIRequest();
+      setCurrency(rates);
+    };
+    useEffect(() => {
+      getCurrencies();
+      // eslint-disable-next-line
+    }, []);
+  } catch (error) {
+    console.log(error);
+  }
 
   return (
     <Box maxWidth="1200px" m="auto" minHeight="100vh">
-      {currency ? (
-        <>
-          <Header currency={currency} />
-          <SelectConvector currency={currency} title="Currency converter" />
-        </>
-      ) : (
-        <h2>Sorry, something went wrong</h2>
-      )}
-
+      <Header currency={currency} />
+      <SelectConvector
+        currency={currency}
+        title={currency ? 'Currency converter' : 'Sorry, something went wrong'}
+      />
       <GlobalStyle />
     </Box>
   );
