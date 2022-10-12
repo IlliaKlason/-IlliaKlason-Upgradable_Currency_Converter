@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/IlliaKlason-Upgradable_Currency_Converter/static/css/main.c3d5249d.css",
-    "main.js": "/IlliaKlason-Upgradable_Currency_Converter/static/js/main.a1078c11.js",
-    "index.html": "/IlliaKlason-Upgradable_Currency_Converter/index.html",
-    "main.c3d5249d.css.map": "/IlliaKlason-Upgradable_Currency_Converter/static/css/main.c3d5249d.css.map",
-    "main.a1078c11.js.map": "/IlliaKlason-Upgradable_Currency_Converter/static/js/main.a1078c11.js.map"
+    "main.css": "/IlliaKlason-Currency_Converter/static/css/main.c3d5249d.css",
+    "main.js": "/IlliaKlason-Currency_Converter/static/js/main.c4e0a40a.js",
+    "index.html": "/IlliaKlason-Currency_Converter/index.html",
+    "main.c3d5249d.css.map": "/IlliaKlason-Currency_Converter/static/css/main.c3d5249d.css.map",
+    "main.c4e0a40a.js.map": "/IlliaKlason-Currency_Converter/static/js/main.c4e0a40a.js.map"
   },
   "entrypoints": [
     "static/css/main.c3d5249d.css",
-    "static/js/main.a1078c11.js"
+    "static/js/main.c4e0a40a.js"
   ]
 }
