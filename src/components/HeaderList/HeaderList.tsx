@@ -1,7 +1,15 @@
 import { List, Text } from './HeaderListStyled';
 
-const HeaderList = ({ currency, location }) => {
-  const locationConverter = curr => curr * currency[location];
+
+interface ICurrency {
+  [key: string]:  number;
+}
+interface ISelectConverterProps {
+  location: string;
+  currency: ICurrency
+}
+const HeaderList = ({ currency, location }: ISelectConverterProps) => {
+  const locationConverter = (curr: number) => curr * currency[location];
   const list = ['UAH', 'USD', 'EUR'];
   return (
     <List>

@@ -1,31 +1,46 @@
 import { useEffect, useState } from 'react';
+import { GroupBase, OptionsOrGroups } from 'react-select';
 
 import Box from '../../utils';
-import SelectConvectorOption from 'components/SelectConvectorOption';
-import { Title } from './SelectConvectorStyled';
+import SelectConverterOption from '../SelectConverterOption';
+import { Title } from './SelectConvectorStyled'
 
-const SelectConvector = ({ title, currency }) => {
-  const [leftValue, setLeftValue] = useState(0);
-  const [rightValue, setRightValue] = useState(0);
-  const [leftCurrency, setLeftCurrency] = useState(0);
-  const [rightCurrency, setRightCurrency] = useState(0);
-  const [isSelected, setIsSelected] = useState(false);
-  const [leftClick, setLeftClick] = useState(false);
-  const [rightClick, setRightClick] = useState(false);
+interface ICurrency {
+  [key: string]:  number;
+}
+interface ISelectConverterProps {
+  title: string;
+  currency: ICurrency
+}
+const SelectConverter = ({ title, currency }:ISelectConverterProps) => {
+  const [leftValue, setLeftValue] = useState<number>(0);
+  const [rightValue, setRightValue] = useState<number>(0);
+  const [leftCurrency, setLeftCurrency] = useState<number>(0);
+  const [rightCurrency, setRightCurrency] = useState<number>(0);
+  const [isSelected, setIsSelected] = useState<boolean>(false);
+  const [leftClick, setLeftClick] = useState<boolean>(false);
+  const [rightClick, setRightClick] = useState<boolean>(false);
 
-  const optionsUpdate = () => {
+
+  interface IOptionsUpdate {
+    value: number;
+    label: string;
+  }
+
+  const optionsUpdate = ():OptionsOrGroups<IOptionsUpdate, GroupBase<IOptionsUpdate>> | undefined  =>  {
     if (currency) {
-      //   const keys = Object.keys(currency);
-      //   //   filter(item => item === 'RUB');
-      //   const values = Object.values(currency);
-      //   const options = [];
-      //   for (let i = 0; i < keys.length; i += 1) {
-      //     options.push({ value: values[i], label: keys[i] });
-      //   }
+      // const keys = Object.keys(currency);
+      // //   filter(item => item === 'RUB');
+      // const values = Object.values(currency);
+      // const options = [];
+      // for (let i = 0; i < keys.length; i += 1) {
+      //   options.push({ value: values[i], label: keys[i] });
+      // }
       const options = [];
       for (let key in currency) {
         options.push({ value: currency[key], label: key });
       }
+      
       return (
         options
           // .filter(item => item.label !== 'RUB')
@@ -43,14 +58,14 @@ const SelectConvector = ({ title, currency }) => {
 
   useEffect(() => {
     if (isSelected && leftClick) {
-      setRightValue(((leftValue / leftCurrency) * rightCurrency).toFixed(2));
+      setRightValue(Number(((leftValue / leftCurrency) * rightCurrency).toFixed(2)));
       setLeftClick(false);
     }
   }, [isSelected, leftClick, leftCurrency, leftValue, rightCurrency]);
 
   useEffect(() => {
     if (isSelected && rightClick) {
-      setLeftValue(((rightValue / rightCurrency) * leftCurrency).toFixed(2));
+      setLeftValue(Number(((rightValue / rightCurrency) * leftCurrency).toFixed(2)));
       setRightClick(false);
     }
   }, [
@@ -78,7 +93,7 @@ const SelectConvector = ({ title, currency }) => {
         gridGap="32px"
         m="0 auto"
       >
-        <SelectConvectorOption
+        <SelectConverterOption
           selectTool={setLeftClick}
           inputValue={leftValue}
           disabled={!isSelected}
@@ -86,7 +101,7 @@ const SelectConvector = ({ title, currency }) => {
           options={options}
           selectChanger={setLeftCurrency}
         />
-        <SelectConvectorOption
+        <SelectConverterOption
           selectTool={setRightClick}
           inputValue={rightValue}
           disabled={!isSelected}
@@ -99,4 +114,4 @@ const SelectConvector = ({ title, currency }) => {
   );
 };
 
-export default SelectConvector;
+export default SelectConverter;

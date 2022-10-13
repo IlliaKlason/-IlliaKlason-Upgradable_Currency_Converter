@@ -3,17 +3,27 @@ import { useRef } from 'react';
 import Box from '../../utils';
 import { Icon, Button, Input, Title } from './HeaderSearchInputStyled';
 
-const HeaderSearchInput = ({ locationChanger, currency, location }) => {
-  const locationInput = useRef();
 
-  const handleLocationChanger = e => {
+interface ICurrency {
+  [key: string]:  number;
+}
+interface HeaderProps {
+  location: string;
+  currency: ICurrency;
+  locationChanger: (str: string)=> void
+}
+
+const HeaderSearchInput = ({ locationChanger, currency, location }: HeaderProps) => {
+  const locationInput = useRef<HTMLInputElement>(null);
+
+  const handleLocationChanger = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const curr = locationInput.current.value.toUpperCase();
+    const curr = locationInput?.current?.value.toUpperCase();
     const currencyList = Object.keys(currency);
+    if(curr && locationInput)
     currencyList.includes(curr)
       ? locationChanger(curr)
       : alert('Currency not found, please try again.');
-    locationInput.current.value = '';
   };
 
   return (
@@ -32,8 +42,8 @@ const HeaderSearchInput = ({ locationChanger, currency, location }) => {
           type="text"
           ref={locationInput}
           placeholder="Enter currency code"
-          minLength="3"
-          maxLength="3"
+          minLength={3}
+          maxLength={3}
         />
         <Button type="submit">
           <Icon />
